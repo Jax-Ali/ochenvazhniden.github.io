@@ -18,18 +18,6 @@ const revealObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.18 });
 document.querySelectorAll('.reveal').forEach((item) => revealObserver.observe(item));
 
-const eventDate = new Date('2026-12-12T18:00:00+05:00');
-const pads = (value) => String(Math.max(0, value)).padStart(2, '0');
-function updateCountdown() {
-  const delta = Math.max(0, eventDate.getTime() - Date.now());
-  const seconds = Math.floor(delta / 1000);
-  document.querySelector('#days').textContent = pads(Math.floor(seconds / 86400));
-  document.querySelector('#hours').textContent = pads(Math.floor((seconds % 86400) / 3600));
-  document.querySelector('#minutes').textContent = pads(Math.floor((seconds % 3600) / 60));
-}
-updateCountdown();
-window.setInterval(updateCountdown, 1000);
-
 let audioContext;
 let musicTimer;
 function note(frequency, start, duration, gain = 0.035) {

@@ -58,8 +58,136 @@ main { width:min(100%,600px); margin:auto; overflow:hidden; background:var(--pap
 .slider-dots button.is-active { width:24px; border-radius:5px; background:#e2be82; }
 
 .spinning-ornament { position:absolute; z-index:0; width:190px; height:190px; color:var(--wine); opacity:.18; pointer-events:none; animation:ornament-spin 32s linear infinite; }
-.spinning-ornament svg { width:100%; height:100%; stroke:currentColor; stroke-width:2.2; }
+.spinning-ornament img { width:100%; height:100%; display:block; object-fit:contain; mix-blend-mode:multiply; filter:sepia(.8) saturate(1.7) hue-rotate(306deg); }
 .spinning-ornament--hero { right:-73px; bottom:106px; color:#9a564e; opacity:.22; }
 .spinning-ornament--message { right:-78px; top:22px; width:220px; height:220px; color:#a56b57; animation-direction:reverse; animation-duration:38s; }
 .spinning-ornament--details { left:-71px; bottom:38px; width:198px; height:198px; color:#a16a4f; opacity:.15; animation-duration:42s; }
 @keyframes ornament-spin { to { transform:rotate(360deg); } }
+
+/* Ровный светлый фон, как в видео-референсе: без зерна, градиента и тени. */
+body { background:#f8f3ed; }
+body::before, .section::before { display:none; }
+main { background:#f8f3ed; box-shadow:none; }
+.section, .hero, .section--soft { background:#f8f3ed; }
+
+/* Типографическая палитра: чёрный для содержания, бордовый — только для акцентов. */
+:root { --ink:#201816; --wine:#8d3028; --wine-dark:#421b18; --muted:#8b5d54; }
+.hero__date, .hero__event { color:var(--ink); }
+.hero__intro { color:var(--wine); }
+.hero__name { color:var(--wine-dark); }
+.eyebrow { color:var(--wine); }
+.message h2, .details h2, .rsvp h2 { color:var(--ink); }
+.message h2 em, .details h2 em { color:var(--wine); }
+.message__copy, .rsvp__note { color:var(--ink); }
+.parents span { color:var(--muted); }
+.parents strong, .details__venue { color:var(--wine); }
+.details__city { color:var(--ink); }
+.rsvp-form label > span, .rsvp-form legend { color:var(--muted); }
+.rsvp-form input[type="text"] { color:var(--ink); }
+.attendance-options span { color:var(--ink); }
+.map-link { color:var(--wine-dark); }
+
+/* Фактура бумаги из присланного референса. */
+body, main, .section, .hero, .section--soft, .welcome, .footer {
+  background-color:#f7f4ee;
+  background-image:url("assets/paper-texture.webp");
+  background-repeat:repeat;
+  background-size:850px auto;
+}
+.welcome { background-position:center; }
+
+/* Компоновка повторяет видео-референс: светлая карточка, фото, календарь, адрес. */
+.gallery { min-height:365px; padding:46px 12px; background-color:#f7f4ee; }
+.gallery__grid { grid-template-columns:repeat(3,1fr); grid-template-rows:270px; gap:4px; max-width:520px; }
+.gallery__caption { color:var(--wine-dark); }
+.gallery-photo--one { grid-row:auto; border-radius:0; }
+.gallery-photo { border:1px solid var(--wine-dark); }
+.gallery-photo--one img { object-position:center; }
+.gallery-photo--two img { object-position:center; }
+.gallery-photo--three img { object-position:center; }
+.gallery-photo:hover img { filter:none; }
+.calendar { min-height:610px; display:grid; place-items:center; background-color:#f7f4ee; }
+.calendar .section-inner { width:min(100%,390px); }
+.calendar h2 { margin:0 0 15px; color:var(--ink); font:2.85rem/1 var(--script); }
+.calendar .flourish { color:var(--wine); }
+.calendar__month { margin:25px 0 14px; color:var(--wine); font:600 .76rem var(--sans); letter-spacing:.18em; text-transform:uppercase; }
+.calendar__grid { display:grid; grid-template-columns:repeat(7,1fr); gap:11px 4px; align-items:center; color:var(--ink); font:1.32rem/1 var(--serif); }
+.calendar__grid b { color:var(--wine-dark); font:600 .79rem var(--serif); }
+.calendar__grid span { position:relative; display:grid; place-items:center; min-height:27px; }
+.calendar__chosen { color:#fff; font-weight:600; z-index:0; }
+.calendar__chosen::before { content:""; position:absolute; z-index:-1; width:43px; height:39px; border:3px solid var(--wine); border-radius:50% 50% 48% 48%; transform:rotate(-42deg) translate(-1px,-1px); }
+.calendar__chosen::after { content:""; position:absolute; z-index:-2; top:2px; left:50%; width:18px; height:18px; background:var(--wine); transform:translateX(-50%) rotate(45deg); }
+.calendar__date, .calendar__time { margin:29px 0 0; color:var(--ink); font:2.25rem/1.1 var(--script); }
+.calendar__time { margin:9px 0 27px; color:var(--wine); }
+.spinning-ornament--calendar { right:-93px; top:45px; width:235px; height:235px; opacity:.14; animation-direction:reverse; animation-duration:46s; }
+.details { min-height:500px; }
+.details h2 { line-height:.9; }
+.details__city { margin-top:0; }
+.wishes, .section--wine { min-height:410px; background-color:#f7f4ee; color:var(--ink); }
+.wishes .eyebrow { color:var(--wine); }
+.wishes h2 { color:var(--ink); }
+.wish-card { background:transparent; border-color:rgba(141,48,40,.34); }
+.wish-card p { color:var(--ink); }
+.wish-card footer b { color:var(--wine-dark); }
+.wish-card footer { color:var(--muted); }
+.wish-card footer span { border-color:rgba(141,48,40,.4); }
+.wish-card .quote { color:var(--wine); }
+.section--wine .eyebrow { color:var(--wine); }
+.section--wine h2 { color:var(--ink); }
+.footer { min-height:185px; color:var(--ink); }
+.footer .top-border { filter:none; }
+.footer p { color:var(--wine-dark); }
+.footer__initial { color:var(--wine); }
+.footer small { color:var(--muted); }
+
+/* Пользовательские орнамент и птицы: белая подложка визуально исчезает. */
+.top-border { height:34px; border:0; background:none; overflow:hidden; }
+.top-border img { display:block; width:100%; height:31px; object-fit:fill; mix-blend-mode:multiply; filter:sepia(1) saturate(2.25) hue-rotate(300deg) brightness(.78); opacity:.92; }
+.birds { position:absolute; z-index:1; left:50%; top:53px; width:245px; height:95px; overflow:hidden; pointer-events:none; transform:translateX(-50%); }
+.birds img { display:block; width:100%; height:auto; mix-blend-mode:multiply; filter:sepia(1) saturate(2.2) hue-rotate(300deg) brightness(.65); opacity:.62; transform:translateY(-5px); }
+.birds i { display:none; }
+.footer .top-border img { opacity:.82; }
+
+/* Чистая светлая основа и спокойная типографика, ближе к видео-референсу. */
+:root { --paper:#fbfaf7; --ink:#181312; --wine:#762a24; --wine-dark:#371412; --muted:#765550; }
+body, main, .section, .hero, .section--soft, .welcome, .footer,
+.gallery, .calendar, .wishes, .section--wine {
+  background-color:var(--paper);
+  background-image:none;
+}
+.welcome { background:#fbfaf7; }
+.welcome__card { background:#fbfaf7; box-shadow:none; border-color:rgba(118,42,36,.28); }
+.welcome::before { border-color:rgba(118,42,36,.38); }
+.welcome::after { border-color:rgba(118,42,36,.18); }
+
+/* Классический serif в служебных строках вместо современного sans. */
+.eyebrow, .hero__date, .hero__event, .scroll-hint, .parents span,
+.details__city, .calendar__month, .calendar__grid b, .rsvp-form label > span,
+.rsvp-form legend, .submit-button, .footer small, .wish-card footer {
+  font-family:var(--serif);
+  font-weight:600;
+}
+.eyebrow { color:var(--wine); letter-spacing:.13em; font-size:.78rem; }
+.hero__date { color:var(--ink); letter-spacing:.28em; font-size:.72rem; }
+.hero__event { color:var(--ink); letter-spacing:.2em; font-size:1.25rem; }
+.hero__intro { color:var(--wine); font-size:2.15rem; }
+.hero__name { color:var(--wine-dark); font-size:4.65rem; }
+.message h2, .details h2, .rsvp h2 { color:var(--ink); }
+.message h2 em, .details h2 em, .parents strong, .details__venue { color:var(--wine); }
+.message__copy, .rsvp__note { color:var(--ink); font-size:1.42rem; line-height:1.34; }
+.details__city { color:var(--ink); letter-spacing:.12em; font-size:.9rem; }
+.calendar h2 { color:var(--wine-dark); font-size:3.05rem; }
+.calendar__month { color:var(--ink); font-size:1.05rem; letter-spacing:.14em; }
+.calendar__grid { color:var(--ink); font-size:1.52rem; }
+.calendar__grid b { color:var(--wine-dark); font-size:1rem; }
+.calendar__date { color:var(--ink); font-size:2.5rem; }
+.calendar__time { color:var(--wine); font-size:2.48rem; }
+.wish-card p { color:var(--ink); font-size:1.55rem; }
+.rsvp-form label > span, .rsvp-form legend { color:var(--wine); font-size:.85rem; letter-spacing:.09em; }
+.rsvp-form input[type="text"], .attendance-options span { color:var(--ink); }
+.footer p { color:var(--wine-dark); }
+
+@media (max-width:390px) {
+  .hero__name { font-size:4rem; }
+  .calendar__grid { font-size:1.32rem; }
+}
