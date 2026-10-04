@@ -401,3 +401,16 @@ body.is-opened .hero .hero-photo { animation:photo-settle 6s 1.15s ease-out both
   line-height:1.42;
   letter-spacing:.005em;
 }
+
+/* Блок владельцев — отдельный изящный акцент, а не служебная подпись. */
+.details__city {
+  color:var(--wine-dark);
+  font-family:var(--script);
+  font-size:1.7rem;
+  font-style:italic;
+  font-weight:600;
+  letter-spacing:.015em;
+  text-transform:none;
+}
+.details { min-height:475px; }
+.footer { min-height:155px; }
