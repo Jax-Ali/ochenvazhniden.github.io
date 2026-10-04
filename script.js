@@ -10,6 +10,7 @@ openInvitation.addEventListener('click', () => {
   welcome.classList.add('is-open');
   invitation.setAttribute('aria-hidden', 'false');
   document.body.style.overflowY = 'auto';
+  window.setTimeout(() => document.body.classList.add('is-opened'), 70);
   playChime();
 });
 

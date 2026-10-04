@@ -1,4 +1,4 @@
-:root { --paper:#f8f1e9; --paper-deep:#eee0d2; --ink:#4a211e; --wine:#7b302d; --wine-dark:#4d1d1c; --gold:#b28a55; --serif:"Cormorant Garamond", Georgia, serif; --script:"Marck Script", cursive; --sans:"Montserrat", Arial, sans-serif; }
+:root { --paper:#f8f1e9; --paper-deep:#eee0d2; --ink:#4a211e; --wine:#7b302d; --wine-dark:#4d1d1c; --gold:#b28a55; --serif:"Noto Serif", Georgia, serif; --script:"Noto Serif Display", Georgia, serif; --sans:"Noto Serif", Georgia, serif; }
 * { box-sizing:border-box; }
 html { scroll-behavior:smooth; }
 body { margin:0; color:var(--ink); background:#231314; font-family:var(--serif); overflow-x:hidden; }
@@ -140,6 +140,26 @@ body, main, .section, .hero, .section--soft, .welcome, .footer {
 .footer__initial { color:var(--wine); }
 .footer small { color:var(--muted); }
 
+/* Новая шрифтовая пара — полная поддержка казахской кириллицы. */
+.welcome h1, .hero__intro, .hero__name, .message h2, .parents strong,
+.calendar h2, .calendar__date, .calendar__time, .details h2,
+.details__venue, .wishes h2, .rsvp h2, .footer p, .footer__initial,
+.wish-card p { font-family:var(--script); font-style:italic; }
+.message__copy, .rsvp__note, .attendance-options span, .rsvp-form input[type="text"] { font-family:var(--serif); }
+
+/* Единая непрерывная подложка; обрезанный декоративный цветок удалён из разметки. */
+main { overflow:visible; }
+.section { overflow:visible; }
+.message, .gallery, .calendar, .details, .wishes, .rsvp, .footer { border:0; }
+.mandala { display:none; }
+
+/* Круглый орнамент первого экрана перемещён на левую сторону. */
+.spinning-ornament--hero { left:-83px; right:auto; top:332px; bottom:auto; }
+
+/* Обработка двух последних картинок: светлая подложка растворяется на белом фоне. */
+.top-border img { filter:grayscale(1) brightness(2.1) contrast(4) sepia(1) saturate(6) hue-rotate(306deg); mix-blend-mode:multiply; }
+.birds img { filter:grayscale(1) brightness(2.1) contrast(4) sepia(1) saturate(7) hue-rotate(306deg); mix-blend-mode:multiply; opacity:.82; }
+
 /* Пользовательские орнамент и птицы: белая подложка визуально исчезает. */
 .top-border { height:34px; border:0; background:none; overflow:hidden; }
 .top-border img { display:block; width:100%; height:31px; object-fit:fill; mix-blend-mode:multiply; filter:sepia(1) saturate(2.25) hue-rotate(300deg) brightness(.78); opacity:.92; }
@@ -190,4 +210,169 @@ body, main, .section, .hero, .section--soft, .welcome, .footer,
 @media (max-width:390px) {
   .hero__name { font-size:4rem; }
   .calendar__grid { font-size:1.32rem; }
+}
+
+/* Финальная типографика: изящный кириллический Cormorant для акцентов,
+   спокойный Manrope для чтения. Обе гарнитуры содержат казахские буквы. */
+:root {
+  --serif:"Manrope", "TildaSans", Arial, sans-serif;
+  --script:"Cormorant Infant", Georgia, serif;
+  --sans:"Manrope", "TildaSans", Arial, sans-serif;
+}
+
+body { font-family:var(--sans); font-weight:400; }
+.welcome h1, .hero__intro, .hero__name, .message h2, .parents strong,
+.calendar h2, .calendar__date, .calendar__time, .details h2,
+.details__venue, .wishes h2, .rsvp h2, .footer p, .footer__initial,
+.wish-card p {
+  font-family:var(--script);
+  font-style:italic;
+  font-weight:600;
+  letter-spacing:-.015em;
+}
+.welcome p:not(.eyebrow), .message__copy, .rsvp__note,
+.attendance-options span, .rsvp-form input[type="text"] {
+  font-family:var(--sans);
+  font-weight:400;
+  letter-spacing:0;
+}
+.eyebrow, .hero__event, .scroll-hint, .parents span, .details__city,
+.calendar__month, .calendar__grid, .calendar__grid b, .rsvp-form label > span,
+.rsvp-form legend, .submit-button, .footer small, .wish-card footer {
+  font-family:var(--sans);
+  font-style:normal;
+}
+.hero__intro { font-size:2.35rem; line-height:.9; font-weight:500; }
+.hero__name { font-size:5.25rem; line-height:.82; font-weight:600; }
+.message h2 { font-size:3rem; line-height:.96; }
+.message h2 em, .details h2 em { font-weight:700; }
+.message__copy { max-width:345px; font-size:1.03rem; line-height:1.7; }
+.parents strong { font-size:2.45rem; }
+.calendar h2 { font-size:3.45rem; }
+.calendar__date, .calendar__time { font-size:2.8rem; line-height:.96; }
+.details h2 { font-size:3.75rem; }
+.details__venue { font-size:3.2rem; }
+.wishes h2, .rsvp h2 { font-size:3.25rem; line-height:.98; }
+.wish-card p { font-size:1.8rem; line-height:1.08; }
+.footer p { font-size:2.8rem; }
+.eyebrow { font-size:.66rem; font-weight:700; letter-spacing:.2em; }
+.hero__event { font-size:.77rem; font-weight:700; letter-spacing:.28em; }
+.calendar__grid { font-family:var(--script); font-style:normal; font-weight:600; }
+.calendar__grid b { font-family:var(--sans); font-size:.66rem; font-weight:700; }
+.calendar__month, .details__city { font-size:.69rem; font-weight:700; }
+
+/* Открытие приглашения: сначала исчезает конверт, затем — орнамент, имя и фото. */
+#invitation { opacity:0; transition:opacity .38s ease; }
+body.is-opened #invitation { opacity:1; }
+.welcome.is-open .welcome__card {
+  opacity:0;
+  transform:scale(.94) translateY(-8px);
+  filter:blur(7px);
+  transition:opacity .48s ease, transform .55s cubic-bezier(.2,.75,.25,1), filter .42s ease;
+}
+.hero .top-border, .hero .spinning-ornament, .hero .birds,
+.hero .hero__intro, .hero .hero__name, .hero .hero__event,
+.hero .hero__arch, .hero .scroll-hint { opacity:0; }
+body.is-opened .hero .top-border { animation:border-unroll .72s .12s cubic-bezier(.18,.8,.25,1) both; }
+body.is-opened .hero .spinning-ornament { animation:ornament-arrive 1s .26s cubic-bezier(.18,.8,.25,1) both, ornament-spin 32s 1.25s linear infinite; }
+body.is-opened .hero .birds { animation:birds-arrive 1.1s .3s cubic-bezier(.18,.8,.25,1) both; }
+body.is-opened .hero .hero__intro { animation:invitation-rise .75s .42s cubic-bezier(.18,.8,.25,1) both; }
+body.is-opened .hero .hero__name { animation:name-ink .92s .56s cubic-bezier(.18,.8,.25,1) both; }
+body.is-opened .hero .hero__event { animation:invitation-rise .7s .75s cubic-bezier(.18,.8,.25,1) both; }
+body.is-opened .hero .hero__arch { animation:portrait-reveal 1.1s .78s cubic-bezier(.2,.76,.2,1) both; }
+body.is-opened .hero .scroll-hint { animation:invitation-rise .65s 1.28s cubic-bezier(.18,.8,.25,1) both; }
+body.is-opened .hero .hero-photo { animation:photo-settle 6s 1.15s ease-out both; }
+.gallery__grid.is-visible .gallery-photo { animation:photo-lift .75s cubic-bezier(.18,.8,.25,1) both; }
+.gallery__grid.is-visible .gallery-photo--two { animation-delay:.12s; }
+.gallery__grid.is-visible .gallery-photo--three { animation-delay:.24s; }
+.calendar__chosen::before { animation:heart-draw 1.1s 1.05s both; }
+
+@keyframes border-unroll { from { opacity:0; clip-path:inset(0 50% 0 50%); } to { opacity:1; clip-path:inset(0 0 0 0); } }
+@keyframes invitation-rise { from { opacity:0; transform:translateY(23px); } to { opacity:1; transform:translateY(0); } }
+@keyframes ornament-arrive { from { opacity:0; transform:translateX(-22px) scale(.82) rotate(-25deg); } to { opacity:.22; transform:translateX(0) scale(1) rotate(0); } }
+@keyframes birds-arrive { from { opacity:0; transform:translate(-50%, 13px) scale(.92); } to { opacity:1; transform:translate(-50%, 0) scale(1); } }
+@keyframes name-ink { from { opacity:0; transform:translateY(16px) scale(.94); filter:blur(8px); } to { opacity:1; transform:translateY(0) scale(1); filter:blur(0); } }
+@keyframes portrait-reveal { from { opacity:0; clip-path:inset(0 50% 0 50%); transform:translateY(18px); } to { opacity:1; clip-path:inset(0 0 0 0); transform:translateY(0); } }
+@keyframes photo-settle { from { transform:scale(1.13); } to { transform:scale(1.04); } }
+@keyframes photo-lift { from { opacity:0; transform:translateY(22px) scale(.97); } to { opacity:1; transform:translateY(0) scale(1); } }
+@keyframes heart-draw { from { opacity:0; transform:rotate(-42deg) translate(-1px,-1px) scale(.58); } to { opacity:1; transform:rotate(-42deg) translate(-1px,-1px) scale(1); } }
+
+@media (max-width:390px) {
+  .hero__intro { font-size:2.05rem; }
+  .hero__name { font-size:4.5rem; }
+  .message h2 { font-size:2.62rem; }
+  .calendar h2 { font-size:3.1rem; }
+  .calendar__date, .calendar__time { font-size:2.45rem; }
+  .details h2 { font-size:3.35rem; }
+}
+
+/* Последняя корректировка первого экрана и навигации. */
+.sound-toggle {
+  top:auto;
+  right:auto;
+  bottom:16px;
+  left:16px;
+}
+@media (min-width:601px) {
+  .sound-toggle { left:calc(50% - 278px); right:auto; }
+}
+.hero { padding-top:46px; }
+.hero__intro {
+  margin-top:28px;
+  color:#8a463d;
+  font-size:1.72rem;
+  line-height:1;
+}
+.hero__name {
+  margin-top:11px;
+  margin-bottom:0;
+  color:#9b3f36;
+}
+.hero__event {
+  margin-top:22px;
+  color:#48201d;
+}
+.hero__arch { margin-top:31px; }
+
+/* Убираем горизонтальные полосы: остаётся круглый вертикальный орнамент,
+   его белая подложка растворяется на светлой бумаге через multiply. */
+.hero .top-border, .footer .top-border { display:none; }
+.spinning-ornament img {
+  /* Белый остаётся чисто белым и сливается с бумажной подложкой,
+     видимыми остаются только тёмные линии орнамента. */
+  filter:grayscale(1) contrast(2) brightness(1.15);
+  mix-blend-mode:multiply;
+}
+.spinning-ornament--hero {
+  width:205px;
+  height:205px;
+  left:-94px;
+  top:340px;
+  opacity:.19;
+}
+.footer__initial { display:none; }
+
+/* Визуальная метка даты — тонкий контур сердца, как в видео-референсе. */
+.calendar__chosen { color:var(--ink); font-weight:600; isolation:isolate; }
+.calendar__chosen::before {
+  content:"";
+  position:absolute;
+  top:50%;
+  left:50%;
+  width:51px;
+  height:58px;
+  border:0;
+  border-radius:0;
+  background:center / 100% 100% no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 68'%3E%3Cpath d='M30 63C25 54 5 42 5 23C5 13 11 7 20 7c6 0 9 3 10 8c1-5 4-8 10-8c9 0 15 6 15 16c0 19-20 31-25 40Z' fill='none' stroke='%23762a24' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  transform:translate(-50%,-50%) scale(1);
+  transform-origin:center;
+  animation:heart-beat 1.45s ease-in-out infinite;
+}
+.calendar__chosen::after { display:none; }
+@keyframes heart-beat {
+  0%, 100% { transform:translate(-50%,-50%) scale(1); }
+  12% { transform:translate(-50%,-50%) scale(1.18); }
+  24% { transform:translate(-50%,-50%) scale(.98); }
+  36% { transform:translate(-50%,-50%) scale(1.11); }
+  52% { transform:translate(-50%,-50%) scale(1); }
 }
