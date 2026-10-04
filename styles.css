@@ -376,3 +376,28 @@ body.is-opened .hero .hero-photo { animation:photo-settle 6s 1.15s ease-out both
   36% { transform:translate(-50%,-50%) scale(1.11); }
   52% { transform:translate(-50%,-50%) scale(1); }
 }
+
+/* Композиция обращения повторяет текстовый блок референса: длинные прописные
+   строки и пригласительный текст без крупного заголовка. */
+.hero { min-height:670px; }
+.message { min-height:445px; padding-top:46px; padding-bottom:46px; }
+.message .section-inner { max-width:415px; }
+.message__greeting {
+  margin:0;
+  color:#4f332e;
+  font-size:1.02rem;
+  font-weight:500;
+  line-height:1.68;
+  letter-spacing:.055em;
+}
+.message .flourish { margin:25px 0 28px; color:var(--wine); }
+.message .message__copy {
+  max-width:390px;
+  color:#5a3b35;
+  font-family:var(--script);
+  font-size:1.08rem;
+  font-style:normal;
+  font-weight:500;
+  line-height:1.42;
+  letter-spacing:.005em;
+}
